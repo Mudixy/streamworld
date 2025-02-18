@@ -1,0 +1,147 @@
+/* Applique un fond sombre et un design plus épuré */
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style du catalogue */
+#catalogue {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Style des films et séries */
+.film {
+    width: 220px;
+    margin: 15px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #00aaff;
+    border-radius: 15px;
+    padding: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.film:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00aaff;
+}
+
+/* Style des affiches */
+.film img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Style des titres */
+.film p {
+    margin-top: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Style de la barre de recherche */
+#search {
+    display: block;
+    width: 80%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #00aaff;
+    border-radius: 25px;
+    background: #1a1a1a;
+    color: white;
+    text-align: center;
+    outline: none;
+}
+
+#search:focus {
+    box-shadow: 0 0 10px #00aaff;
+}
+
+/* Style du lecteur vidéo */
+/* Conteneur du lecteur vidéo */
+.video-container {
+    width: 80%;
+    max-width: 900px; /* Largeur max pour éviter qu'il soit trop grand */
+    margin: 40px auto; /* Centre le lecteur */
+    background: rgba(255, 255, 255, 0.1);
+    border: 3px solid #00aaff; /* Bordure bleu ciel */
+    border-radius: 15px; /* Angles arrondis */
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style du lecteur iframe */
+.video-container iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Assure un format parfait en 16:9 */
+    border-radius: 10px; /* Angles arrondis */
+    border: none;
+}
+
+/* Conteneur du bouton pour le centrer */
+.catalogue-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Style du bouton */
+.catalogue-button {
+    display: inline-block;
+    padding: 10px 18px; /* Taille légèrement réduite */
+    font-size: 16px; /* Police plus petite */
+    font-weight: bold;
+    color: white;
+    background-color: #00aaff; /* Bleu ciel */
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    border: 2px solid #0088cc; /* Bordure bleu plus foncé */
+    text-align: center;
+}
+
+.catalogue-button:hover {
+    background-color: #0088cc; /* Bleu légèrement plus foncé */
+    box-shadow: 0 0 8px #00aaff;
+}
+
+/* Conteneur des saisons centré */
+.season-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Style des boutons de saison */
+.season-button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #00aaff; /* Bleu ciel */
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    border: 2px solid #0088cc; /* Bordure bleu plus foncé */
+    text-align: center;
+}
+
+.season-button:hover {
+    background-color: #0088cc; /* Bleu légèrement plus foncé */
+    box-shadow: 0 0 8px #00aaff;
+}
