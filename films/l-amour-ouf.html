@@ -176,7 +176,7 @@ function formatDuration(minutes) {
         function renderMovieDetails(data) {
             const { title, overview, release_date, genres, runtime, credits } = data;
             const genreList = genres.map(genre => genre.name).join(", ");
-            const castList = credits.cast.slice(0, 100).map(cast => `
+            const castList = credits.cast.slice(0, 15).map(cast => `
                 <div class="character">
                     <img src="https://image.tmdb.org/t/p/w138_and_h175_face${cast.profile_path}" alt="${cast.name}" class="actor">
                     <p>${cast.name} <br> > ${cast.character}</p>
