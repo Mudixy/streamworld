@@ -1,0 +1,277 @@
+<html lang="fr">
+    <link type="text/css" rel="stylesheet" id="dark-mode-custom-link"><link type="text/css" rel="stylesheet" id="dark-mode-general-link"><style lang="en" type="text/css" id="dark-mode-custom-style"></style><style lang="en" type="text/css" id="dark-mode-native-style"></style><style lang="en" type="text/css" id="dark-mode-native-sheet"></style><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>•StreamWorld - Catalogue</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div class="nav-buttons">
+            <a href="/index.html" class="link">Catalogue</a>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un film ou une série...">
+        </div>
+    
+        <div class="section-container">
+            <p> </p>
+            <p> </p>
+            <h2 class="category-title">Catalogue</h2>
+            <div class="total-count" id="totalCount">Nombre de séries/films : 3</div>
+            <div class="gallery" id="animeGallery">
+                <a class="thumbnail" href="films/1022789-vice-versa-2.html"><img src="https://static.wixstatic.com/media/2f1af4_2de3c351241a4658abe43f210cf63846~mv2.jpg/v1/fill/w_296,h_401,fp_0.50_0.50,q_90,enc_auto/2f1af4_2de3c351241a4658abe43f210cf63846~mv2.jpg" alt="Vice-Versa 2"></a>
+                <a class="thumbnail" href="films/946877-nous-les-leroy.html"><img src="https://image.tmdb.org/t/p/w300/aKv41BvlvThRxNGtxDPwHxpa4yb.jpg" alt="Nous, les Leroy"></a>
+                <a class="thumbnail" href="films/671-harry-potter-a-lecole-des-sorciers.html"><img src="https://image.tmdb.org/t/p/original/lWZcuIQVc8d1hmXj3vPgYc5Fm5b.jpg" alt="Harry Potter à l'école des sorciers"></a>
+            </div>
+    
+            <script>
+                const gallery = document.getElementById("animeGallery");
+                const searchInput = document.getElementById("searchInput");
+                const totalCount = document.getElementById("totalCount");
+        
+                function createAnimeThumbnails(animeList) {
+                    gallery.innerHTML = '';
+                    animeList.forEach(anime => {
+                        const animeThumbnail = document.createElement('a');
+                        animeThumbnail.classList.add('thumbnail');
+                        animeThumbnail.href = anime.link;
+                        animeThumbnail.onclick = () => addToRecentlyViewed(anime.title, anime.link, anime.img, anime.ongoing);
+        
+                        if (anime.ongoing) {
+                            const ongoingLabel = document.createElement('div');
+                            ongoingLabel.classList.add('ongoing-label');
+                            ongoingLabel.textContent = "En cours";
+                            animeThumbnail.appendChild(ongoingLabel);
+                        }
+        
+                        const img = document.createElement('img');
+                        img.src = anime.img;
+                        img.alt = anime.title;
+                        animeThumbnail.appendChild(img);
+        
+                        gallery.appendChild(animeThumbnail);
+                    });
+                    updateTotalCount(animeList.length); // Update the total count based on the number of thumbnails
+                }
+        
+                function updateTotalCount(count) {
+                    totalCount.textContent = `Nombre de séries/films : ${count}`;
+                }
+        
+                function sortAnimeAlphabetically(animeList) {
+                    return animeList.sort((a, b) => a.title.localeCompare(b.title));
+                }
+        
+                function filterAnime() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const filteredAnimeList = animeList.filter(anime => 
+                        anime.title.toLowerCase().includes(searchTerm)
+                    );
+                    const sortedFilteredAnimeList = sortAnimeAlphabetically(filteredAnimeList);
+                    createAnimeThumbnails(sortedFilteredAnimeList);
+                }
+        
+                searchInput.addEventListener('input', filterAnime);
+                createAnimeThumbnails(sortAnimeAlphabetically(animeList));
+        
+                function addToRecentlyViewed(title, url, imageUrl, isOngoing) {
+                    const fullUrl = url.startsWith('/Serie/') ? url : '/Serie/' + url;
+                    const Serie = { title, url: fullUrl, imageUrl, isOngoing };
+                    let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+                    const alreadyInList = recentlyViewed.some(item => item.title === title);
+                    if (!alreadyInList) {
+                        recentlyViewed.push(Serie);
+                        localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+                    }
+                }
+            </script>
+<style>
+            body {
+                margin: 0;
+                font-family: 'Poppins', sans-serif;
+                background-color: #0a1014;
+                background-repeat: repeat;
+                background-size: 80px;
+                overflow: hidden;
+                opacity: 0;
+                animation: fadeInBackground 2s ease-in-out forwards;
+            }
+    
+            header {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 30px;
+                position: fixed;
+                top: 0;
+                background-color: rgba(10, 16, 20, 0.95);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+    
+            .nav-logo {
+                font-size: 2rem;
+                font-family: 'DisneyFont', sans-serif; 
+                color: #007BFF;
+                cursor: pointer;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                transition: transform 0.3s;
+            }
+    
+            .nav-logo span {
+                color: #ffffff;
+            }
+    
+            .nav-logo:hover {
+                transform: scale(1.05);
+            }
+    
+            @font-face {
+                font-family: 'DisneyFont';
+                src: url('https://static.wixstatic.com/media/a3792f_31b58f92529945228155a510cf28faed.ttf') format('truetype');
+                font-display: swap;
+            }
+    
+        .nav-buttons {
+                display: flex;
+                justify-content: flex-end;
+                width: 100%;
+                position: relative;
+                right: 4cm;
+            }
+    
+            .link {
+                color: #ffffff;
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 500;
+                padding: 6px 12px;
+                border-radius: 5px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+    
+            .link:hover {
+                background-color: #007BFF;
+                color: #ffffff;
+            }
+    
+            .search-container {
+                margin: 80px auto 20px;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+    
+            .search-input {
+                width: 70%;
+                padding: 10px;
+                border: 1px solid #007BFF;
+                border-radius: 5px;
+                font-size: 1rem;
+                background-color: #1f262a;
+                color: #ffffff;
+                text-align: center;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            }
+    
+            .search-input:focus {
+                outline: none;
+                border-color: #ffffff;
+                box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            }
+    
+            .section-container {
+                background-color: #12181d;
+                border-radius: 10px;
+                padding: 15px;
+                margin: 0 auto 20px;
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+            }
+    
+            .category-title {
+                color: #ffffff;
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+    
+            .gallery {
+                display: flex;
+                flex-wrap: wrap; /* Organise les vignettes sur plusieurs lignes */
+                gap: 15px;
+                overflow-y: auto;
+                max-height: 800px;
+                scrollbar-width: thin;
+                scrollbar-color: #007BFF #12181d;
+            }
+    
+            .gallery::-webkit-scrollbar {
+                width: 8px;
+            }
+    
+            .gallery::-webkit-scrollbar-thumb {
+                background-color: #007BFF;
+                border-radius: 5px;
+            }
+    
+            .thumbnail {
+                position: relative;
+                width: 200px;
+                height: 300px;
+                overflow: hidden;
+                border-radius: 15px;
+                box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+                transition: transform 0.3s;
+                cursor: pointer;
+            }
+
+            .movie-title-calg {
+                text-align: justify;
+                width: 200px;
+            }
+    
+            .thumbnail img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+    
+            .thumbnail:hover {
+                transform: scale(1.05);
+            }
+    
+            .ongoing-label {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                background-color: #ff0000;
+                color: #ffffff;
+                padding: 3px 8px;
+                font-size: 0.7rem;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+    
+            .total-count {
+                color: #ffffff;
+                font-size: 1rem;
+                margin-top: 10px;
+            }
+
+            .movie-title {
+            color:#007BFF;
+        }
+    
+            @keyframes fadeInBackground {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+</style>        
+</body>
+</html>
